@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.p-datatable {
+  background-color: #ffffff !important;
+  font-size: 14px !important;
+  .p-sortable-column {
+    .p-sortable-column-icon {
+      height: 10px !important;
+    }
+  }
+  .p-datatable-tbody > tr {
+    height: 45px !important;
+  }
+  .p-datatable-thead {
+    background-color: #f7f7f7 !important;
+  }
+}
+
+.p-icon-field-left > .p-inputtext {
+  padding-left: 2.5rem !important;
+}

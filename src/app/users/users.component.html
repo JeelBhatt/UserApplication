@@ -1,0 +1,63 @@
+<section class="p-5">
+  <h1 class="my-5 font-bold">Users</h1>
+  <p-table
+    #userTable
+    [value]="users"
+    [totalRecords]="totalRecords"
+    [columns]="displayHeader"
+    [responsiveLayout]="'scroll'"
+    [loading]="isLoading"
+    [customSort]="true"
+    (sortFunction)="sortUser($event)"
+    [lazy]="true"
+    (onLazyLoad)="sortUser($event)"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <p-iconField iconPosition="left" class="ml-auto">
+          <p-inputIcon>
+            <i class="pi pi-search"></i>
+          </p-inputIcon>
+          <input
+            pInputText
+            type="text"
+            (input)="onSearch($any($event.target).value)"
+            placeholder="Search user"
+          />
+        </p-iconField>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        @for (col of columns; track $index) { @if (col !== 'address') {
+        <th pSortableColumn="{{ col }}">
+          <span class="flex items-center"
+            >{{ col | uppercase }} <p-sortIcon field="{{ col }}"
+          /></span>
+        </th>
+        } @else{
+        <th>{{ col | uppercase }}</th>
+        } }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        @for (col of columns; track $index) {
+        <td>
+          {{ col === "address" ? (rowData[col] | address) : rowData[col] }}
+        </td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rowsPerPage"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="false"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  />
+</section>
